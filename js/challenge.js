@@ -36,7 +36,7 @@ let c = 0;
 
       plus.addEventListener('click', event => {
         console.log(event)
-        c--;
+        c++;
           counter.innerHTML = `${c}`;
       })
 
