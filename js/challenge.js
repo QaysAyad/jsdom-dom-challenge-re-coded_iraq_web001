@@ -36,8 +36,8 @@ let c = 0;
 
       plus.addEventListener('click', event => {
         console.log(event)
-
-      timedCount();
+        c--;
+          counter.innerHTML = `${c}`;
       })
 
       minus.addEventListener('click', event => {
