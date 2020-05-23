@@ -90,7 +90,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 
-  let counter = document.getElementById("counter");
+let counter = document.getElementById("counter");
 let pause = document.getElementById("pause");
 let heart = document.getElementById("heart");
 let likes = document.querySelector(".likes");
