@@ -36,10 +36,10 @@ let c = 0;
 
       incrementBtn.addEventListener('click', event => {
         console.log(event)
-      
+
       timedCount();
       })
-      
+
       decrementBtn.addEventListener('click', event => {
         console.log(event)
       c--;
