@@ -13,14 +13,14 @@ let input = document.getElementById('comment-input')
 
 document.addEventListener('DOMContentLoaded', () => {
 
-    
+
     const parsedNumber = () => {
         let number = document.getElementById('counter').innerText
         let parsedCounter = parseInt(number)
         return parsedCounter
     }
-    
-    
+
+
 // 1) Code below encompasses the functionality of increasing counter by 1 every second and implementing it
     const counter = () => {
         let number = parsedNumber()
@@ -64,12 +64,12 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     })
 
-// 4) As a user, I can pause the counter, which should: 
+// 4) As a user, I can pause the counter, which should:
     // pause the counter
-    // disable all buttons except the pause button 
+    // disable all buttons except the pause button
     // the pause button should then show the text "resume."
     // When 'resume' is clicked, it should restart the counter and re-enable the buttons.
-    
+
     pauseButton.addEventListener('click', () => {
         if (pauseButton.innerText === "pause") {
             clearInterval(interval)
@@ -85,9 +85,9 @@ document.addEventListener('DOMContentLoaded', () => {
             })
         }
     })
-        
+
 // 5) As a user, I can leave comments on my gameplay, such as: "Wow, what a fun game this is."
-    
+
     document.querySelector('form').addEventListener('submit', (e) => {
         e.preventDefault()
         if (input.value) {
@@ -100,8 +100,8 @@ document.addEventListener('DOMContentLoaded', () => {
         let comment = document.createElement('li')
         comment.innerText = input.value
         ul.appendChild(comment)
-    } 
+    }
 })
-    
+
     
 })
