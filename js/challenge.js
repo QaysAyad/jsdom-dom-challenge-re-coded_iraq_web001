@@ -10,8 +10,8 @@ document.addEventListener('DOMContentLoaded', () => {
   const commentList = document.querySelector('#commentList')
   const commentInput = document.querySelector('#comment-input')
   let numbersList = document.querySelector('#likesList')
-  
-  
+
+
   let iter = 0
   let pause = false
   let currentCount = 0
@@ -47,7 +47,7 @@ document.addEventListener('DOMContentLoaded', () => {
       counter()
     }
   })
-  
+
   incrementBtn.addEventListener('click', event => {
     console.log(event)
 
@@ -82,7 +82,7 @@ document.addEventListener('DOMContentLoaded', () => {
   commentForm.addEventListener('submit', event => {
     event.preventDefault()
     debugger
-    
+
     let li = commentInput.value
     commentList.innerHTML += `<li> ${li} </li>`
   })
