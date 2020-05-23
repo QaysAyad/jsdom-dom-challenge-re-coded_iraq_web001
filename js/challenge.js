@@ -1,107 +1,172 @@
 document.addEventListener('DOMContentLoaded', () => {
-  const likedNumbers = {}
-let pauseButton = document.getElementById('pause')
-let minusButton = document.getElementById('minus')
-let plusButton = document.getElementById('plus')
-let heartButton = document.getElementById('heart')
-let submitButton = document.getElementById('submit')
-let buttons = [minusButton, plusButton, submitButton, heartButton]
-let comments = document.getElementById('list')
-let ul = document.createElement('ul')
-comments.appendChild(ul)
-let input = document.getElementById('comment-input')
+  console.log("%c DOM is loaded", "color :purple")
 
-document.addEventListener('DOMContentLoaded', () => {
+  const pageCounter = document.querySelector('#counter')
+  const pauseBtn = document.querySelector('#pause')
+  const incrementBtn = document.querySelector('#plus')
+  const decrementBtn = document.querySelector('#minus')
+  const heartBtn = document.querySelector('#heart')
+  const commentForm = document.querySelector('#comment-form')
+  const commentList = document.querySelector('#commentList')
+  const commentInput = document.querySelector('#comment-input')
+  let numbersList = document.querySelector('#likesList')
 
 
-    const parsedNumber = () => {
-        let number = document.getElementById('counter').innerText
-        let parsedCounter = parseInt(number)
-        return parsedCounter
+  let iter = 0
+  let pause = false
+  let currentCount = 0
+  let selectedNumber = 0
+  let likes = 0
+
+  function counter() {
+    if (pause) {
+      return
+    } else {
+      currentCount = pageCounter.innerHTML = (iter++)
+      setTimeout(counter, 1000)
     }
+  }
 
+  counter()
 
-// 1) Code below encompasses the functionality of increasing counter by 1 every second and implementing it
-    const counter = () => {
-        let number = parsedNumber()
-        number += 1
-        document.getElementById('counter').innerText = number
+  pauseBtn.addEventListener('click', event => {
+    console.log(event)
+
+    if (pause == false) {
+      pause = true
+      incrementBtn.disabled = true
+      decrementBtn.disabled = true
+      heartBtn.disabled = true
+      pauseBtn.innerHTML = 'resume'
+    } else if (pause == true) {
+      pause = false
+      incrementBtn.disabled = false
+      decrementBtn.disabled = false
+      heartBtn.disabled = false
+      pauseBtn.innerHTML = 'pause'
+      counter()
     }
-    let interval = setInterval(counter, 1000)
+  })
 
-// 2) Next increment and decrement counter on clicking '+' or '-' buttons
-    increment = document.getElementById('plus')
-    decrement = document.getElementById('minus')
+  incrementBtn.addEventListener('click', event => {
+    console.log(event)
 
-    increment.addEventListener('click', () => {
-        counter()
-    })
+    iter = currentCount
+    iter += 1
+    pageCounter.innerHTML = iter
+  })
 
-    decrement.addEventListener('click', () => {
-        let number = parsedNumber()
-        number -= 1
-        document.getElementById('counter').innerText = number
-    })
-// 3) As a user, I can 'like' an individual number of the counter. I should see count of the number of 'likes' associated with that number.
+  decrementBtn.addEventListener('click', event => {
+    console.log(event)
 
-    heartButton.addEventListener('click', () => {
-        let int = parsedNumber()
-        likedNumbers.hasOwnProperty(int) ? likedNumbers[int] += 1 : likedNumbers[int] = 1
-        let lis = document.getElementsByTagName('li')
-        lisArray = Array.from(lis)
+    iter = currentCount
+    iter -= 1
+    pageCounter.innerHTML = iter
+  })
 
-        if (likedNumbers[int] === 1) {
-            let li = document.createElement('li')
-            li.innerText = `${int} has ${likedNumbers[int]} like(s)`
-            let ul = document.querySelector('.likes')
-            ul.appendChild(li)
-        } else {
-            lisArray.map(li => {
-                if (li.innerText.startsWith(int.toString())) {
-                    li.innerText = `${int} has ${likedNumbers[int]} like(s)`
-                }
-            })
-        }
-    })
+  heartBtn.addEventListener('click', event => {
+    console.log(event)
+    let number = currentCount
 
-// 4) As a user, I can pause the counter, which should:
-    // pause the counter
-    // disable all buttons except the pause button
-    // the pause button should then show the text "resume."
-    // When 'resume' is clicked, it should restart the counter and re-enable the buttons.
-
-    pauseButton.addEventListener('click', () => {
-        if (pauseButton.innerText === "pause") {
-            clearInterval(interval)
-            pauseButton.innerText = "resume"
-            buttons.forEach(button => {
-                button.disabled = true
-            })
-        } else {
-            interval = setInterval(counter, 1000)
-            pauseButton.innerText = "pause"
-            buttons.forEach(button => {
-                button.disabled = false
-            })
-        }
-    })
-
-// 5) As a user, I can leave comments on my gameplay, such as: "Wow, what a fun game this is."
-
-    document.querySelector('form').addEventListener('submit', (e) => {
-        e.preventDefault()
-        if (input.value) {
-            addComment()
-        }
-        e.target.reset()
-    })
-
-    const addComment = () => {
-        let comment = document.createElement('li')
-        comment.innerText = input.value
-        ul.appendChild(comment)
+    if (selectedNumber == number) {
+      likes += 1
+      numbersList.innerHTML += `<li> Number ${number} has ${likes} likes </li>`
+    } else {
+        selectedNumber = number
+        likes = 0
+        likes += 1
+        numbersList.innerHTML += `<li> Number ${number} has ${likes} likes </li>`
     }
-})
+  })
 
-    
+  commentForm.addEventListener('submit', event => {
+    event.preventDefault()
+    debugger
+
+    let li = commentInput.value
+    commentList.innerHTML += `<li> ${li} </li>`
+  })
+
+
+
+
+  let counter = document.getElementById("counter");
+let pause = document.getElementById("pause");
+let heart = document.getElementById("heart");
+let likes = document.querySelector(".likes");
+let minus = document.getElementById("minus");
+let plus = document.getElementById("plus");
+let submit = document.getElementById("submit")
+let commentForm = document.getElementById("comment-form")
+
+let timerIsOn = 0;
+let t = setTimeout(timedCount, 1000); 
+var c = 0;
+
+
+    function timedCount() {
+        counter.innerHTML = `${c}`;
+        c++;
+        t = setTimeout(timedCount, 1000);
+    };
+
+    function stopCount() {
+        clearTimeout(t);
+        timerIsOn = 0;
+    };
+
+    function startCount() {
+        if (!timerIsOn) {
+          timerIsOn = 1;
+          timedCount();
+        }
+      };
+
+    pause.addEventListener("click", () => {
+        if (pause.id == "pause"){
+            stopCount ();
+            disable();
+            pause.id = "resume";
+            pause.innerHTML = "resume";
+        }
+        else if (document.getElementById("resume")){
+            startCount ();
+            enable();
+            pause.id = "pause";
+            pause.innerHTML = "pause";
+        }
+    });
+
+    heart.addEventListener("click", () => {
+        para = document.createElement("p");
+        const text = `${c} has a like.`;
+        para.innerHTML = text;
+        likes.appendChild(para);
+    });
+
+    function disable(){
+        heart.disabled = true;
+        plus.disabled = true;
+        minus.disabled = true;
+        submit.disabled = true;
+        likes.disabled = true;
+    };
+
+    function enable(){
+        heart.disabled = false;
+        plus.disabled = false;
+        minus.disabled = false;
+        submit.disabled = false;
+        likes.disabled = false;
+    };
+
+    commentForm.addEventListener("submit", function(event){
+        event.preventDefault();
+  
+        let comment = document.getElementById("comment-input");
+        const newComment = document.createElement("li");
+  
+        newComment.innerHTML = comment.value;
+        document.getElementById("list").appendChild(newComment);
+      });
 })
