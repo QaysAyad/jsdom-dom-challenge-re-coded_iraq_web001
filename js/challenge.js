@@ -100,7 +100,7 @@ let submit = document.getElementById("submit")
 let commentForm = document.getElementById("comment-form")
 
 let timerIsOn = 0;
-let t = setTimeout(timedCount, 1000); 
+let t = setTimeout(timedCount, 1000);
 var c = 0;
 
 
@@ -162,10 +162,10 @@ var c = 0;
 
     commentForm.addEventListener("submit", function(event){
         event.preventDefault();
-  
+
         let comment = document.getElementById("comment-input");
         const newComment = document.createElement("li");
-  
+
         newComment.innerHTML = comment.value;
         document.getElementById("list").appendChild(newComment);
       });
